@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Crypto Bot by ASM Traders — AI Crypto Signals & Demo Trading</title>
+  <meta name="description" content="Crypto Bot by ASM Traders — live crypto signals, technical analysis, demo trading and educational blog powered by AI." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/lightweight-charts@4.2.0/dist/lightweight-charts.standalone.production.js"></script>
+  <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="container header-inner">
+      <div class="logo">
+        <span class="logo-mark">⚡</span>
+        <span>Crypto Bot <small>by ASM Traders</small></span>
+      </div>
+      <nav class="nav">
+        <a href="#market">Market</a>
+        <a href="#signals">Signals</a>
+        <a href="#demo">Demo Trading</a>
+        <a href="#blog">Blog</a>
+        <a href="#pricing">Pricing</a>
+      </nav>
+      <div class="header-actions" id="headerActions">
+        <button class="btn ghost" onclick="openModal('login')">Login</button>
+        <button class="btn primary" onclick="openModal('register')">Get Started</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <div class="eyebrow">AI-POWERED CRYPTO ANALYTICS</div>
+          <h1>Trade smarter with <span class="gradient-text">data-driven signals</span></h1>
+          <p>
+            Live charts, multi-indicator analysis, dynamic risk management and demo trading —
+            all in one professional platform by ASM Traders.
+          </p>
+          <div class="hero-actions">
+            <a href="#market" class="btn primary">Open Live Dashboard</a>
+            <a href="#demo" class="btn ghost">Try Demo Trading</a>
+          </div>
+          <div class="hero-badges">
+            <span>RSI · MACD · EMA · ADX · ATR</span>
+            <span>Dynamic Validity</span>
+            <span>Risk / Reward Engine</span>
+          </div>
+        </div>
+        <div class="glass hero-card">
+          <div class="mini-label">SYSTEM STATUS</div>
+          <div class="status"><span class="pulse"></span> Live Engine Active</div>
+          <div class="metric-grid">
+            <div><span>Signal Engine</span><b>Selective LONG / SHORT / WAIT</b></div>
+            <div><span>Risk Layer</span><b>Entry · SL · TP1/2/3</b></div>
+            <div><span>AI Layer</span><b>Gemini-ready explanations</b></div>
+            <div><span>Blog Engine</span><b>30-topic SEO automation</b></div>
+            <div><span>Demo Trading</span><b>Paper portfolio ready</b></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MARKET + CHART + SIGNAL -->
+    <section id="market" class="section">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">LIVE MARKET</div>
+            <h2>Market Intelligence</h2>
+          </div>
+          <div class="controls">
+            <input id="symbol" value="BTCUSDT" aria-label="Symbol" />
+            <select id="interval">
+              <option value="5m">5m</option>
+              <option value="15m" selected>15m</option>
+              <option value="1h">1h</option>
+              <option value="4h">4h</option>
+            </select>
+            <button class="btn primary" onclick="loadDashboard()">Refresh</button>
+            <label class="checkbox-label">
+              <input type="checkbox" id="aiExplain" /> AI Explain
+            </label>
+          </div>
+        </div>
+
+        <div class="dashboard-grid">
+          <div class="glass chart-card">
+            <div id="chart" style="width:100%;height:420px;"></div>
+          </div>
+          <div id="signals" class="glass signal-card">
+            <div class="mini-label">AI-ASSISTED SIGNAL VIEW</div>
+            <div id="signalPanel">Loading signal...</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DEMO TRADING -->
+    <section id="demo" class="section">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">PAPER TRADING</div>
+            <h2>Demo Trading</h2>
+          </div>
+          <button class="btn primary" id="btnRefreshDemo" onclick="loadDemoAccount()">Refresh Account</button>
+        </div>
+
+        <div class="demo-grid">
+          <div class="glass demo-card">
+            <div class="mini-label">DEMO ACCOUNT</div>
+            <div id="demoAccount">
+              <p class="muted">Login to start paper trading with virtual balance.</p>
+            </div>
+          </div>
+          <div class="glass demo-card">
+            <div class="mini-label">QUICK TRADE FROM SIGNAL</div>
+            <div id="quickTradeBox">
+              <p class="muted">Generate a signal first, then open a demo position in one click.</p>
+              <button class="btn primary" id="btnOpenFromSignal" onclick="openTradeFromSignal()" disabled>Open Demo Trade</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="glass" style="margin-top:18px;padding:20px;">
+          <div class="mini-label">TRADE HISTORY</div>
+          <div id="tradeHistory" class="trade-table-wrap">
+            <p class="muted">No trades yet.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="section cards-section">
+      <div class="container cards">
+        <article class="glass feature">
+          <span>01</span>
+          <h3>Selective Signal Engine</h3>
+          <p>Multi-indicator scoring with LONG / SHORT / WAIT. No forced trades. Score is calibrated, never hard-coded as win probability.</p>
+        </article>
+        <article class="glass feature">
+          <span>02</span>
+          <h3>Dynamic Risk Engine</h3>
+          <p>Every actionable signal includes Entry, Stop Loss, TP1/TP2/TP3 and Risk/Reward ratios based on ATR.</p>
+        </article>
+        <article class="glass feature">
+          <span>03</span>
+          <h3>Demo + Future Backtest</h3>
+          <p>Paper trade today. Historical performance and walk-forward validation will feed the reporting layer next.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- BLOG -->
+    <section id="blog" class="section">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">SEO CONTENT HUB</div>
+            <h2>Crypto Blog</h2>
+          </div>
+          <div class="controls">
+            <button class="btn ghost" onclick="loadBlogPosts()">Refresh Posts</button>
+            <button class="btn primary" id="btnGenerateBlogs" onclick="generateBlogs()">Generate AI Articles</button>
+          </div>
+        </div>
+        <div id="blogTopics" class="blog-grid"></div>
+      </div>
+    </section>
+
+    <!-- PRICING -->
+    <section id="pricing" class="section">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">SUBSCRIPTIONS</div>
+            <h2>Choose your plan</h2>
+          </div>
+        </div>
+        <div class="pricing-grid" id="pricingGrid">
+          <!-- filled by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ACCOUNT -->
+    <section id="account" class="section">
+      <div class="container">
+        <div class="glass account-card">
+          <div>
+            <div class="eyebrow">ACCOUNT</div>
+            <h2 id="accountTitle">Login to unlock full features</h2>
+            <p id="accountDesc">Register for free to access demo trading, save signals and manage your paper portfolio.</p>
+          </div>
+          <div id="accountActions">
+            <button class="btn primary" onclick="openModal('register')">Create Free Account</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>© 2026 ASM Traders — Crypto Bot by ASM Traders</p>
+      <p class="muted small">This is an analytics & educational platform. Not financial advice. Past performance is not indicative of future results.</p>
+    </div>
+  </footer>
+
+  <!-- AUTH MODAL -->
+  <div class="modal-overlay" id="authModal">
+    <div class="modal glass">
+      <button class="modal-close" onclick="closeModal()">&times;</button>
+      <div id="loginForm">
+        <h3>Login</h3>
+        <input type="email" id="loginEmail" placeholder="Email" />
+        <input type="password" id="loginPassword" placeholder="Password" />
+        <button class="btn primary full" onclick="doLogin()">Login</button>
+        <p class="muted center">No account? <a href="#" onclick="switchAuth('register')">Register</a></p>
+      </div>
+      <div id="registerForm" style="display:none;">
+        <h3>Create Account</h3>
+        <input type="text" id="regUsername" placeholder="Username" />
+        <input type="email" id="regEmail" placeholder="Email" />
+        <input type="password" id="regPassword" placeholder="Password (min 6)" />
+        <input type="text" id="regFullName" placeholder="Full Name (optional)" />
+        <button class="btn primary full" onclick="doRegister()">Register Free</button>
+        <p class="muted center">Already have account? <a href="#" onclick="switchAuth('login')">Login</a></p>
+      </div>
+      <p id="authError" class="error"></p>
+    </div>
+  </div>
+
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
